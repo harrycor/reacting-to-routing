@@ -10,7 +10,7 @@ const People = () => {
     .then(res => res.json())
     .then(resParsed => setPeopleData(resParsed))
     .catch(e => alert(e));
-  })
+  }, [])
   
   return (
     <div className="d-flex justify-content-center flex-wrap mt-5">
