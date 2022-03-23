@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const PeopleDeatails = () => {
 
+    const navigateBack = useNavigate();
     const [personData, setPersonData] = useState([]);
     const { peopleid } = useParams();
 
@@ -12,6 +13,10 @@ const PeopleDeatails = () => {
         .then(resParsed => setPersonData(resParsed))
         .catch(e => alert(e));
     }, [])
+
+const goBack = () => {
+  navigateBack('/people')
+}
     
     if(!personData){<h1>Loading ...</h1>}
 
@@ -23,7 +28,10 @@ const PeopleDeatails = () => {
             <p>Gender: {personData.gender}</p>
             <p>Eye color: {personData.eye_color}</p>
             <p>Hair Color: {personData.hair_color}</p>
-            <a href={`https://ghibliapi.herokuapp.com/people/${peopleid}`} target="_blank" className="btn btn-primary mb-2">API</a>
+            <div className="d-flex justify-content-evenly mb-2">
+            <a href={`https://ghibliapi.herokuapp.com/people/${peopleid}`} target="_blank" className="btn btn-primary">API</a>
+            <button onClick={goBack} className="btn btn-warning">Back</button>
+            </div>
             </div>
         </div>
     </div>

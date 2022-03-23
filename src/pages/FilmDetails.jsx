@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const FilmDetails = () => {
+  const navBack = useNavigate();
   const { filmid } = useParams();
   const [movieData, setMovieData] = useState([]);
 
@@ -13,6 +14,10 @@ const FilmDetails = () => {
       })
       .catch((e) => alert(e));
   }, [filmid]);
+
+  const useNav = () => {
+    navBack('/films');
+  }
 
   return (
     <div className="d-flex justify-content-center">
@@ -31,6 +36,7 @@ const FilmDetails = () => {
             <p className="cadrd-text">Director: {movieData.director}</p>
             <p className="cadrd-text">Producer: {movieData.producer}</p>
             <p className="cadrd-text">Release Date: {movieData.release_date}</p>
+            <button onClick={useNav} className="btn btn-warning">Back</button>
           </div>
         </div>
       </div>
